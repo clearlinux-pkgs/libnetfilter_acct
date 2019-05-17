@@ -6,7 +6,7 @@
 #
 Name     : libnetfilter_acct
 Version  : 1.0.3
-Release  : 1
+Release  : 2
 URL      : https://www.netfilter.org/projects/libnetfilter_acct/files/libnetfilter_acct-1.0.3.tar.bz2
 Source0  : https://www.netfilter.org/projects/libnetfilter_acct/files/libnetfilter_acct-1.0.3.tar.bz2
 Source99 : https://www.netfilter.org/projects/libnetfilter_acct/files/libnetfilter_acct-1.0.3.tar.bz2.sig
