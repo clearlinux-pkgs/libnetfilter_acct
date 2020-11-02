@@ -6,11 +6,11 @@
 #
 Name     : libnetfilter_acct
 Version  : 1.0.3
-Release  : 2
+Release  : 3
 URL      : https://www.netfilter.org/projects/libnetfilter_acct/files/libnetfilter_acct-1.0.3.tar.bz2
 Source0  : https://www.netfilter.org/projects/libnetfilter_acct/files/libnetfilter_acct-1.0.3.tar.bz2
-Source99 : https://www.netfilter.org/projects/libnetfilter_acct/files/libnetfilter_acct-1.0.3.tar.bz2.sig
-Summary  : Library providing interface to extended accounting infrastructure
+Source1  : https://www.netfilter.org/projects/libnetfilter_acct/files/libnetfilter_acct-1.0.3.tar.bz2.sig
+Summary  : Netfilter extended accounting infrastructure library
 Group    : Development/Tools
 License  : LGPL-2.1
 Requires: libnetfilter_acct-lib = %{version}-%{release}
@@ -26,7 +26,6 @@ Summary: dev components for the libnetfilter_acct package.
 Group: Development
 Requires: libnetfilter_acct-lib = %{version}-%{release}
 Provides: libnetfilter_acct-devel = %{version}-%{release}
-Requires: libnetfilter_acct = %{version}-%{release}
 Requires: libnetfilter_acct = %{version}-%{release}
 
 %description dev
@@ -52,32 +51,34 @@ license components for the libnetfilter_acct package.
 
 %prep
 %setup -q -n libnetfilter_acct-1.0.3
+cd %{_builddir}/libnetfilter_acct-1.0.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1558099980
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604353062
+export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1558099980
+export SOURCE_DATE_EPOCH=1604353062
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libnetfilter_acct
-cp COPYING %{buildroot}/usr/share/package-licenses/libnetfilter_acct/COPYING
+cp %{_builddir}/libnetfilter_acct-1.0.3/COPYING %{buildroot}/usr/share/package-licenses/libnetfilter_acct/01a6b4bf79aca9b556822601186afab86e8c4fbf
 %make_install
 
 %files
@@ -96,4 +97,4 @@ cp COPYING %{buildroot}/usr/share/package-licenses/libnetfilter_acct/COPYING
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/libnetfilter_acct/COPYING
+/usr/share/package-licenses/libnetfilter_acct/01a6b4bf79aca9b556822601186afab86e8c4fbf
